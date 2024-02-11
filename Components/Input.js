@@ -24,7 +24,7 @@ export default Input;
 const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
-        marginBottom: '15%',
+        marginBottom: 20,
     },
     input: {
     backgroundColor:'#AAA8C8',
