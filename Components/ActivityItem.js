@@ -3,6 +3,7 @@ import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 
 export default function ActivityItem({ activity }) {
+     
     return (
         <View style={styles.itemContainer}>
             <Text style={styles.activityName}>{activity.name}</Text>

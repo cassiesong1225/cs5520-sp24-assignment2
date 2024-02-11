@@ -7,11 +7,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AllActivities from './Screens/AllActivities';
 import BottomTabNavigator from './Components/BottomTab';
-
+import { ActivitiesListProvider } from './Components/ActivitiesListContext';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+    <ActivitiesListProvider>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Start" component={StartScreen} />
@@ -21,9 +22,11 @@ export default function App() {
           <Stack.Screen name="AddAnActivity" component={AddAnActivity} options={
             { headerBackTitleVisible: false, }
           } />
-         </Stack.Navigator>
+        </Stack.Navigator>
+        
 
-    </NavigationContainer>
+      </NavigationContainer>
+      </ActivitiesListProvider>
   );
 }
 

@@ -1,23 +1,31 @@
 import { StyleSheet, Text, View, Button } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect,useContext } from 'react'
 import AddButton from '../Components/AddButton'
-import ActivityList from '../Components/ActivityList'
+import ActivitiesList from '../Components/ActivityList'
+import { ActivitiesListContext } from '../Components/ActivitiesListContext'
 
 export default function AllActivities({ navigation }) {
+    const { activities } = useContext(ActivitiesListContext);
+    console.log(activities);
 
-    useEffect(() => {
+   useEffect(() => {
         navigation.setOptions({
-            headerRight: () => {
-                return <AddButton navigation={navigation} />
-            }
-        })
-    })
+            headerRight: () => <AddButton navigation={navigation} />
+        });
+    },[]);
 
     return (
-        <View>
-            <ActivityList currentScreen={"AllActivities"}/>
+        <View style={styles.container}> 
+            <ActivitiesList  activities={activities}/>
         </View>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+     container: {
+        flex: 1,
+        backgroundColor: '#AAA8C8',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+})

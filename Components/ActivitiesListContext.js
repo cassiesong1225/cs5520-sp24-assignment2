@@ -4,8 +4,6 @@ import React, { createContext, useState } from 'react';
 export const ActivitiesListContext = createContext({
   activities: [],
   addActivity: () => {},
-  // removeActivity: () => {},
-  // updateActivity: () => {},
 });
 
 // Provider component that will wrap the parts of your app that need the activities data
@@ -16,25 +14,7 @@ export const ActivitiesListProvider = ({ children }) => {
   const addActivity = (newActivity) => {
     setActivities((currentActivities) => [newActivity, ...currentActivities]);
   };
-
-  // // Function to remove an activity from the list
-  // const removeActivity = (activityId) => {
-  //   setActivities((currentActivities) =>
-  //     currentActivities.filter((activity) => activity.id !== activityId)
-  //   );
-  // };
-
-  // Function to update an existing activity
-  // const updateActivity = (updatedActivity) => {
-  //   setActivities((currentActivities) =>
-  //     currentActivities.map((activity) =>
-  //       activity.id === updatedActivity.id ? updatedActivity : activity
-  //     )
-  //   );
-  // };
-
-  // The value passed to the provider includes everything that should be accessible from the context
-  return (
+return (
     <ActivitiesListContext.Provider value={{ activities, addActivity }}>
       {children}
     </ActivitiesListContext.Provider>

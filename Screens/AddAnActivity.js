@@ -1,16 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import DatePickerComponent from '../Components/DatePicker'; 
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; // Adjust the path as needed
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; // Adjust the path as needed
 
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
-  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date()); // This will be used for the DateTimePicker
   const [showDatePicker, setShowDatePicker] = useState(false);
   const { addActivity } = useContext(ActivitiesListContext);
 
-  const [activityType, setActivityType] = useState(null);
+  const [activityType, setActivityType] = useState(''); // Renamed for consistency
 
   const handleSaveActivity = () => {
     // Basic validation
@@ -29,18 +29,19 @@ const AddAnActivity = ({ navigation }) => {
       id: Date.now().toString(),
       type: activityType,
       duration: numericDuration,
-      date: date.toISOString(),
+      date: selectedDate.toISOString(),
     });
+    
+    navigation.navigate('AllActivities');
+  };
 
-    // Navigate back to the previous screen
+  const handleCancel = () => {
+    setSelectedDate(new Date());
+    setDuration("");
     navigation.goBack();
   };
 
-   function handleCancel() {
-    setDate(new Date());
-    setDuration("");
-    navigation.goBack();
-  }
+
 
   return (
     <View style={styles.container}>
@@ -59,22 +60,17 @@ const AddAnActivity = ({ navigation }) => {
         onPress={() => setShowDatePicker(true)}
       >
         <Text style={styles.dateText}>
-          {date.toDateString()}
+          {selectedDate.toDateString()}
         </Text>
       </TouchableOpacity>
 
       {showDatePicker && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode="date"
-          display="inline" // Use 'default' for Android
-          onChange={(event, selectedDate) => {
-            const currentDate = selectedDate || date;
-            setShowDatePicker(Platform.OS === 'ios');
-            setDate(currentDate);
-          }}
-        />
+        <DatePickerComponent
+        date={selectedDate}
+        setDate={setSelectedDate}
+        showDatePicker={showDatePicker}
+        setShowDatePicker={setShowDatePicker}
+      />
       )}
 
       <View style={styles.buttonContainer}>

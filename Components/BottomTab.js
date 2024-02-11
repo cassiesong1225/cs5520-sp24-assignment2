@@ -1,8 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
-
-// Import your screen components
 import AllActivities from '../Screens/AllActivities';
 import SpecialActivities from '../Screens/SpecialActivities';
 
