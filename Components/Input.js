@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     },
     inputError: {
-        color: 'drak gray',
+        color: '#f0f',
         fontSize: 15,
     },
 })

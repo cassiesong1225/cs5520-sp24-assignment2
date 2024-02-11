@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import Input from '../Components/Input'; 
 
-const StartScreen = () => {
+export default function StartScreen({ navigation}) {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [emailError, setEmailError] = useState('');
   const [phoneError, setPhoneError] = useState('');
 
   const validateEmail = (email) => {
-    const emailRegex = /\S+@\S+\.\S+/;
+    const emailRegex = /^[\w\.-]+@[\w\.-]+\.\w+$/
     return emailRegex.test(email);
-  };
+    }
 
   const validatePhoneNumber = (phone) => {
     const phoneRegex = /^[0-9]{10}$/;
@@ -34,8 +34,7 @@ const StartScreen = () => {
     }
 
     if (!errors) {
-      // Navigate to the next screen if both inputs are valid
-      // navigation.navigate('NextScreen');
+       navigation.navigate('AllActivities');
     }
   };
 
@@ -46,6 +45,13 @@ const StartScreen = () => {
     setPhoneError('');
   };
 
+      function disableStartHandler() {
+        return email === '' && phoneNumber === ''
+    }
+
+
+        
+    
   return (
     <SafeAreaView style={styles.container}>
       <Input
@@ -74,7 +80,7 @@ const StartScreen = () => {
           onPress={handleStart}
           disabled={!email || !phoneNumber}
         >
-          <Text style={styles.buttonText}>Start</Text>
+          <Text style={styles.buttonText} onPress={handleStart} disabled={disableStartHandler()}>Start </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -115,4 +121,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default StartScreen;
+
