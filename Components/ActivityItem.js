@@ -5,15 +5,21 @@ import { Entypo } from '@expo/vector-icons';
 export default function ActivityItem({ activity }) {
      
     return (
-        <View style={styles.itemContainer}>
-            <Text style={styles.activityName}>{activity.name}</Text>
+        <View style={ styles.itemContainer }>
+        
+
+            <Text style={styles.activityName}>{activity.type}</Text>
             {activity.isSpecial && (
                 <Entypo name="warning" size={24} color="orange" />
-            )}
+                )}
+            <View style={styles.dateContainer}>
             <Text style={styles.activityDate}>
                 {activity.date ? new Date(activity.date).toDateString() : ''}
             </Text>
-            <Text style={styles.activityDuration}>{activity.duration} min</Text>
+            </View>
+            <View style={styles.durationContainer}>
+                <Text style={styles.activityDuration}>{activity.duration} min</Text>
+            </View>
         </View>
     );
 }
@@ -21,18 +27,48 @@ export default function ActivityItem({ activity }) {
 const styles = StyleSheet.create({
     itemContainer: {
         flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#4B4B7C', 
+        justifyContent: 'space-between',
+        borderRadius: 10,
         padding: 10,
+        marginBottom: 10,
+        width: '90%',
+        marginTop: 20,
+        marginHorizontal: 20,
+    },
+
+    activityInfo: {
+        flexDirection: 'row',
         alignItems: 'center',
     },
     activityName: {
-        flex: 1,
         fontWeight: 'bold',
+        fontSize: 14, 
+        color: '#AAA8C8', 
+    },
+    icon: {
+        marginLeft: 8, 
+    },
+     dateContainer: {
+        backgroundColor: 'white',
+        padding: 6,
+        marginRight: 6, 
     },
     activityDate: {
-        marginRight: 10,
+        color: '#4B4B7C', 
+        marginBottom: 4,
+        fontWeight: 'bold',
+        fontSize: 14,
+    },
+   durationContainer: {
+        backgroundColor: 'white',
+        padding: 6,
     },
     activityDuration: {
-        marginRight: 10,
+        color: '#4B4B7C', 
+        fontWeight: 'bold',
+        fontSize: 14,
     },
-    // Additional styles for ActivityItem
 });
+
