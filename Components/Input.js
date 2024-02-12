@@ -7,7 +7,7 @@ const Input= ({label, value, onChangeText, error}) => {
 
     return (
         <View style={styles.inputContainer} >
-            <Text >{label}</Text>
+            <Text style={styles.label}>{label}</Text>
             <TextInput
                 style={styles.input}
                 value={value}
@@ -35,7 +35,12 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     },
     inputError: {
-        color: '#f0f',
+        color: 'black',
         fontSize: 15,
+    },
+    label: {
+        fontSize: 15,
+        color: '#3B387E',
+        fontWeight: 'bold',
     },
 })

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import Input from '../Components/Input'; 
+import GlobalStyles from '../StyleHelper';
 
 export default function StartScreen({ navigation}) {
   const [email, setEmail] = useState('');
@@ -47,13 +48,14 @@ export default function StartScreen({ navigation}) {
 
       function disableStartHandler() {
         return email === '' && phoneNumber === ''
-    }
+      }
+
 
 
         
     
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={GlobalStyles.ScreenContainer}>
       <Input
         label="Email Address"
         value={email}
@@ -70,30 +72,24 @@ export default function StartScreen({ navigation}) {
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={[styles.button, styles.resetButton]}
+          style={styles.button}
           onPress={handleReset}
         >
-          <Text style={styles.buttonText}>Reset</Text>
+          <Text style={styles.ResetButtonText}>Reset</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.startButton]}
+        {/* <TouchableOpacity
+          style={styles.button}
           onPress={handleStart}
           disabled={!email || !phoneNumber}
-        >
-          <Text style={styles.buttonText} onPress={handleStart} disabled={disableStartHandler()}>Start </Text>
-        </TouchableOpacity>
+        > */}
+          <Button title='Start' onPress={handleStart} disabled={disableStartHandler()}/>
+        {/* </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ACA8D3', 
-  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -108,16 +104,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     minWidth: 100, 
   },
-  resetButton: {
-    backgroundColor: '#dbdbdb', 
-  },
-  startButton: {
-    backgroundColor: '#4e4eb2', 
-  },
-  buttonText: {
-    color: 'white',
+  ResetButtonText: { 
+    color: '#a52a2a',
     fontSize: 18,
   },
+  startButton: {
+   fontSize: 18,
+
+  }
 
 });
 
