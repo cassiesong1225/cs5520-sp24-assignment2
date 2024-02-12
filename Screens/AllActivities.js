@@ -3,6 +3,7 @@ import React, { useEffect,useContext } from 'react'
 import AddButton from '../Components/AddButton'
 import ActivitiesList from '../Components/ActivityList'
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'
+import GlobalStyles from '../StyleHelper'
 
 export default function AllActivities({ navigation }) {
     const { activities } = useContext(ActivitiesListContext);
@@ -15,17 +16,10 @@ export default function AllActivities({ navigation }) {
     },[]);
 
     return (
-        <View style={styles.container}> 
+        <View style={GlobalStyles.ScreenContainer}> 
             <ActivitiesList  activities={activities}/>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-     container: {
-        flex: 1,
-        backgroundColor: '#AAA8C8',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
+

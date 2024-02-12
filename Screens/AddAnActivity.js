@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import DatePickerComponent from '../Components/DatePicker'; 
-import ActivityDropDownPicker from '../Components/ActivityDropDown'; // Adjust the path as needed
-import { ActivitiesListContext } from '../Components/ActivitiesListContext'; // Adjust the path as needed
-
+import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
+import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
+import GlobalStyles from '../StyleHelper'
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date()); // This will be used for the DateTimePicker
@@ -44,7 +44,7 @@ const AddAnActivity = ({ navigation }) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.ScreenContainer}>
       <ActivityDropDownPicker onActivityChange={setActivityType} />
 
       <TextInput

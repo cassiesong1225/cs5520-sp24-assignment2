@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import GlobalStyles from '../StyleHelper'
 
 export default function SpecialActivities() {
   return (
-    <View>
+    <View style={ GlobalStyles.ScreenContainer}>
       <Text>SpecialActivities</Text>
     </View>
   )
