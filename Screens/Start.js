@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ACA8D3', // Background color to match the screenshot
+    backgroundColor: '#ACA8D3', 
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    width: '100%', // Full width to allow for space around buttons
-    marginTop: 20, // Margin at the top for spacing
+    width: '100%', 
+    marginTop: 20, 
   },
   button: {
     paddingVertical: 10,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: 100, // Minimum width for each button
+    minWidth: 100, 
   },
   resetButton: {
     backgroundColor: '#dbdbdb', 

@@ -15,7 +15,7 @@ export default function App() {
     <ActivitiesListProvider>
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Start" component={StartScreen} />
+        <Stack.Screen name="Start" component={StartScreen} options={{headerShown : false}} />
           <Stack.Screen name="AllActivities" component={BottomTabNavigator} options={
             { headerShown: false }
           } />

@@ -13,7 +13,6 @@ const AddAnActivity = ({ navigation }) => {
   const [activityType, setActivityType] = useState(''); // Renamed for consistency
 
   const handleSaveActivity = () => {
-    // Basic validation
     if (!activityType) {
       alert('Please select an activity type.');
       return;
