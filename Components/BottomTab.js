@@ -14,15 +14,14 @@ const BottomTabNavigator = () => {
           let iconName;
 
           if (route.name === 'All Activities') {
-            iconName = focused ? 'list-alt' : 'list'; // Icons can be changed according to your preference
+            iconName = focused ? 'list-alt' : 'list';
           } else if (route.name === 'Special Activities') {
-            iconName = focused ? 'star' : 'star-o'; // Icons can be changed according to your preference
+            iconName = focused ? 'star' : 'star-o';
           }
 
-          // You can return any component that you like here!
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
+        tabBarActiveTintColor: 'orange',
         tabBarInactiveTintColor: 'gray',
       })}
     >

@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform }
 import DatePickerComponent from '../Components/DatePicker'; 
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
-import GlobalStyles from '../StyleHelper'
+import GlobalStyles  from '../StyleHelper'
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date()); // This will be used for the DateTimePicker
@@ -46,16 +46,19 @@ const AddAnActivity = ({ navigation }) => {
 
 
   return (
-    <View style={GlobalStyles.ScreenContainer}>
-      <ActivityDropDownPicker onActivityChange={setActivityType} />
-
+    <View style={styles.container}>
+      <View style={styles.edit}>
+        <Text style={GlobalStyles.lable}>Activity *</Text>
+        <ActivityDropDownPicker onActivityChange={setActivityType} />
+      <Text style={GlobalStyles.lable}>Duration *</Text>
       <TextInput
         style={styles.input}
         onChangeText={setDuration}
         value={duration}
         placeholder="Duration (min)"
         keyboardType="numeric"
-      />
+        />
+        <Text style={GlobalStyles.lable}>Date *</Text>
 
       <TouchableOpacity
         style={styles.input}
@@ -68,6 +71,7 @@ const AddAnActivity = ({ navigation }) => {
 
       {showDatePicker && (
         <DatePickerComponent
+          label="Select a date"
         date={selectedDate}
         setDate={setSelectedDate}
         showDatePicker={showDatePicker}
@@ -78,36 +82,38 @@ const AddAnActivity = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <Button title="Cancel" onPress={handleCancel} color="#999" />
         <Button title="Save" onPress={handleSaveActivity} color="#0066CC" />
+        </View>
+
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    // Define your container styles here
+    container: {
+        flex: 1,
+    backgroundColor: '#AAA8C8',
+         justifyContent: 'flex-start',
   },
+  edit: {
+        marginTop: 20,
+       marginHorizontal: 10,
+  },
+
   input: {
     borderColor: '#3B387E',
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
-    margintop: 20,
-    // Define your text input styles here
   },
   dateText: {
     fontSize: 18,
-    // Additional styles for the date text
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // Additional styles for the button container
   },
-  // Add other styles as needed
 });
 
 export default AddAnActivity;

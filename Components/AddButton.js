@@ -5,7 +5,7 @@ export default function AddButton({ navigation}) {
 
   return (
     <View>
-        <Button title="Add" onPress={() => navigation.navigate('AddAnActivity')} />
+        <Button title="Add" onPress={() => navigation.navigate('AddAnActivity')} color = 'orange'/>
     </View>
   )
 }

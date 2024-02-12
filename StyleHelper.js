@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native'
 
 const colors = {
-screenBackground: '#AAA8C8',
+    screenBackground: '#AAA8C8',
+    darkpurple: '#3B387E',
 };
 export default GlobalStyles = StyleSheet.create({
        ScreenContainer: {
@@ -9,5 +10,10 @@ export default GlobalStyles = StyleSheet.create({
         backgroundColor: colors.screenBackground,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    lable: {
+        fontSize: 18,
+        color: '#3B387E',
+        fontWeight: 'bold',
     },
 })

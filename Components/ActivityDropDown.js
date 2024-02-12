@@ -27,14 +27,14 @@ export default function ActivityDropDownPicker({ onActivityChange }) {
         onActivityChange(activity);
       }}
       placeholder="Select An Activity"
-      containerStyle={StyleSheet.container}
+      style={styles.container}
       textStyle={StyleSheet.textStyle}
     />
   );
 }
 const styles = StyleSheet.create({
   container: {
-    zIndex: 1,
+    backgroundColor: '#AAA8C8',
   },
   textStyle: {
     fontSize: 18,
