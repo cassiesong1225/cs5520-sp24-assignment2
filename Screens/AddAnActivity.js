@@ -24,12 +24,15 @@ const AddAnActivity = ({ navigation }) => {
       return;
     }
 
+    const isSpecial = (activityType === 'Running' || activityType === 'Weight Training') && numericDuration > 60;
+
     // Add activity to the context
     addActivity({
       id: Date.now().toString(),
       type: activityType,
       duration: numericDuration,
       date: selectedDate.toISOString(),
+      isSpecial,
     });
     
     navigation.navigate('AllActivities');
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
+    margintop: 20,
     // Define your text input styles here
   },
   dateText: {
