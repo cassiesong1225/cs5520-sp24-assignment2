@@ -1,25 +1,38 @@
 import React from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Platform } from 'react-native';
+import { Text, Platform, StyleSheet, View } from 'react-native';
 
 
-const DatePickerComponent = ({ date, setDate, showDatePicker, setShowDatePicker }) => {
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShowDatePicker(false); 
-    setDate(currentDate);
+const DatePickerComponent = ({ date, setDate,showDatePicker, setShowDatePicker }) => {
+  console.log('date', date);
+  const onChange = (event, date) => {
+    setShowDatePicker(false);
+    setDate(date);
   };
 
+
   return (
+ 
+
     showDatePicker && (
       <DateTimePicker
-        value={date}
+        value={date || new Date()}
         mode="date"
         display={Platform.OS === 'ios' ? 'inline' : 'default'}
-        onChange={onChange}      
+        onChange={onChange}
       />
     )
+
+ 
   );
 };
+
+const styles = StyleSheet.create({
+  dateText: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+
+})
 
 export default DatePickerComponent;

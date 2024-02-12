@@ -3,7 +3,6 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import ActivityItem from './ActivityItem';
 
 export default function ActivityList({ activities,filter }) {
-    console.log(activities);
     const filteredActivities = filter === 'special'
         ? activities.filter(activity => activity.isSpecial)
         : activities;
@@ -12,6 +11,7 @@ export default function ActivityList({ activities,filter }) {
     return (
         <View style={styles.listContainer}>
             <FlatList
+                contentContainerStyle={styles.scrollViewContent}
                 data={filteredActivities}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
@@ -24,5 +24,8 @@ const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
     },
+    scrollViewContent: {
+    alignItems: "center",
+  },
     
 });

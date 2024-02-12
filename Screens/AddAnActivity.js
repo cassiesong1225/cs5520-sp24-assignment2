@@ -6,7 +6,7 @@ import { ActivitiesListContext } from '../Components/ActivitiesListContext';
 import GlobalStyles  from '../StyleHelper'
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date()); // This will be used for the DateTimePicker
+  const [selectedDate, setSelectedDate] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const { addActivity } = useContext(ActivitiesListContext);
 
@@ -17,14 +17,19 @@ const AddAnActivity = ({ navigation }) => {
       alert('Please select an activity type.');
       return;
     }
+
     const numericDuration = parseInt(duration, 10);
     if (isNaN(numericDuration) || numericDuration <= 0) {
       alert('Please enter a valid duration.');
       return;
     }
+     if (!selectedDate) {
+      alert('Please select a date.');
+      return;
+    }
 
-    const isSpecial = (activityType === 'Running' || activityType === 'Weight Training') && numericDuration > 60;
 
+    
     // Add activity to the context
     addActivity({
       id: Date.now().toString(),
@@ -37,12 +42,15 @@ const AddAnActivity = ({ navigation }) => {
     navigation.navigate('AllActivities');
   };
 
+  const isSpecial = (activityType === 'Running' || activityType === 'Weight Training') && duration > 60;
+
+
   const handleCancel = () => {
     setSelectedDate(new Date());
     setDuration("");
     navigation.goBack();
   };
-
+  console.log('date', selectedDate);
 
 
   return (
@@ -55,7 +63,6 @@ const AddAnActivity = ({ navigation }) => {
         style={styles.input}
         onChangeText={setDuration}
         value={duration}
-        placeholder="Duration (min)"
         keyboardType="numeric"
         />
         <Text style={GlobalStyles.lable}>Date *</Text>
@@ -63,17 +70,18 @@ const AddAnActivity = ({ navigation }) => {
       <TouchableOpacity
         style={styles.input}
         onPress={() => setShowDatePicker(true)}
-      >
-        <Text style={styles.dateText}>
-          {selectedDate.toDateString()}
+        >
+             <Text style={styles.dateText}>
+          {selectedDate ? selectedDate.toDateString() : ''}
         </Text>
-      </TouchableOpacity>
+  
+        </TouchableOpacity>
+     
 
       {showDatePicker && (
         <DatePickerComponent
-          label="Select a date"
-        date={selectedDate}
-        setDate={setSelectedDate}
+            date={selectedDate}
+             setDate={setSelectedDate}
         showDatePicker={showDatePicker}
         setShowDatePicker={setShowDatePicker}
       />
