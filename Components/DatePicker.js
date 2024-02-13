@@ -1,6 +1,6 @@
 import React from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Text, Platform, StyleSheet, View } from 'react-native';
+import {  Platform } from 'react-native';
 
 
 const DatePickerComponent = ({ date, setDate,showDatePicker, setShowDatePicker }) => {
@@ -27,12 +27,6 @@ const DatePickerComponent = ({ date, setDate,showDatePicker, setShowDatePicker }
   );
 };
 
-const styles = StyleSheet.create({
-  dateText: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
 
-})
 
 export default DatePickerComponent;
