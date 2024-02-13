@@ -3,7 +3,7 @@ import React, { useEffect,useContext } from 'react'
 import AddButton from '../Components/AddButton'
 import ActivityList from '../Components/ActivityList'
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'
-import GlobalStyles from '../StyleHelper'
+import GlobalStyles , { colors } from '../StyleHelper'
 
 export default function AllActivities({ navigation }) {
     const { activities } = useContext(ActivitiesListContext);
@@ -11,7 +11,9 @@ export default function AllActivities({ navigation }) {
 
    useEffect(() => {
         navigation.setOptions({
-            headerRight: () => <AddButton navigation={navigation} />
+            headerRight: () => <AddButton navigation={navigation} />,
+            headerStyle: { backgroundColor: colors.darkpurple },
+            headerTintColor: 'white',
         });
     },[]);
 

@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform }
 import DatePickerComponent from '../Components/DatePicker'; 
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
-import { GlobalStyles,colors } from '../StyleHelper'
+import GlobalStyles,{ colors } from '../StyleHelper'
 
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   buttonContainer: {
+    marginTop: 150,
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
