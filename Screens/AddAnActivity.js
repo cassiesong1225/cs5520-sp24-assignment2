@@ -3,7 +3,8 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform }
 import DatePickerComponent from '../Components/DatePicker'; 
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
-import GlobalStyles  from '../StyleHelper'
+import { GlobalStyles,colors } from '../StyleHelper'
+
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
@@ -100,7 +101,7 @@ const AddAnActivity = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    backgroundColor: '#AAA8C8',
+    backgroundColor: colors.screenBackground,
          justifyContent: 'flex-start',
   },
   edit: {
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    borderColor: '#3B387E',
+    borderColor: 'colors.darkpurple',
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,

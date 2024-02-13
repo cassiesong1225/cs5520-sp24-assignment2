@@ -11,13 +11,13 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({  color, size }) => {
           let iconName;
 
           if (route.name === 'All Activities') {
-            iconName = focused ? 'list-alt' : 'list';
+            iconName = 'dollar';
           } else if (route.name === 'Special Activities') {
-            iconName = focused ? 'star' : 'star-o';
+            iconName = 'exclamation';
           }
 
           return <FontAwesome name={iconName} size={size} color={color} />;
