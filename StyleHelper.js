@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-const colors = {
+export const colors = {
     screenBackground: '#AAA8C8',
     darkpurple: '#3B387E',
 };
@@ -16,4 +16,5 @@ export default GlobalStyles = StyleSheet.create({
         color: '#3B387E',
         fontWeight: 'bold',
     },
+
 })

@@ -1,6 +1,7 @@
 
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 import React from "react";
+import { colors } from '../StyleHelper';
 
 
 const Input= ({label, value, onChangeText, error}) => {
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     },
     input: {
     backgroundColor:'#AAA8C8',
-    borderColor: '#3B387E',
+    borderColor: colors.darkpurple,
     borderWidth: 2,
     height: 30,
     borderRadius: 5,
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 15,
-        color: '#3B387E',
+        color: colors.darkpurple,
         fontWeight: 'bold',
     },
 })

@@ -15,11 +15,14 @@ export default function App() {
     <ActivitiesListProvider>
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Start" component={StartScreen} options={{headerShown : false}} />
-          <Stack.Screen name="AllActivities" component={BottomTabNavigator} options={
+          <Stack.Screen name="Start" component={StartScreen}
+            options={{ headerShown: false }} />
+          <Stack.Screen name="AllActivities" component={BottomTabNavigator}
+            options={
             { headerShown: false }
           } />
-          <Stack.Screen name="AddAnActivity" component={AddAnActivity} options={
+          <Stack.Screen name="AddAnActivity" component={AddAnActivity}
+            options={
             { headerBackTitleVisible: false, }
           } />
         </Stack.Navigator>
