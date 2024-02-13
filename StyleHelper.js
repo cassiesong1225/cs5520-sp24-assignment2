@@ -12,9 +12,10 @@ export default GlobalStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     lable: {
-        fontSize: 18,
-        color: '#3B387E',
+        fontSize: 15,
+        color: colors.darkpurple,
         fontWeight: 'bold',
     },
+    
 
 })

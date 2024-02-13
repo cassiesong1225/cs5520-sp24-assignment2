@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform }
 import DatePickerComponent from '../Components/DatePicker'; 
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
-import GlobalStyles,{ colors } from '../StyleHelper'
+import GlobalStyles, { colors } from '../StyleHelper'
 
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
@@ -89,8 +89,8 @@ const AddAnActivity = ({ navigation }) => {
       )}
 
       <View style={styles.buttonContainer}>
-        <Button title="Cancel" onPress={handleCancel} color="#999" />
-        <Button title="Save" onPress={handleSaveActivity} color="#0066CC" />
+        <Button title="Cancel" onPress={handleCancel} color="red" />
+          <Button title="Save" onPress={handleSaveActivity} color={colors.darkpurple} />
         </View>
 
       </View>
@@ -99,25 +99,25 @@ const AddAnActivity = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+  container: {
+    flex: 1, 
     backgroundColor: colors.screenBackground,
-         justifyContent: 'flex-start',
+    justifyContent: 'flex-start',
   },
   edit: {
-        marginTop: 20,
-       marginHorizontal: 10,
+      marginTop: 20,
+      marginHorizontal: 10,
   },
 
   input: {
-    borderColor: 'colors.darkpurple',
+    borderColor: colors.darkpurple,
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
   },
   dateText: {
-    fontSize: 18,
+    fontSize: 16,
   },
   buttonContainer: {
     marginTop: 150,

@@ -35,6 +35,7 @@ export default function ActivityDropDownPicker({ onActivityChange }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#AAA8C8',
+    marginBottom: 20,
   },
   textStyle: {
     fontSize: 18,
