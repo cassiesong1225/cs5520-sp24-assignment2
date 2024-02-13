@@ -1,24 +1,31 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Entypo } from '@expo/vector-icons';
+import { colors } from '../StyleHelper';
 
 export default function ActivityItem({ activity }) {
      
     return (
         <View style={ styles.itemContainer }>
         
+                <Text style={styles.activityName}>{activity.type}</Text>
+            <View style={styles.icon}>
+                {activity.isSpecial ? (
+                    <Entypo name="warning" size={24} color="orange" />)
+                       : (
+                 <View style={{ width: 24,marginRight:15 }} /> 
 
-            <Text style={styles.activityName}>{activity.type}</Text>
-            {activity.isSpecial && (
-                <Entypo name="warning" size={24} color="orange" />
-                )}
+                   )} 
+            </View>
+         
             <View style={styles.dateContainer}>
-            <Text style={styles.activityDate}>
+            <Text style={styles.dateadndurationText}>
                 {activity.date ? new Date(activity.date).toDateString() : ''}
-            </Text>
+                </Text>
             </View>
             <View style={styles.durationContainer}>
-                <Text style={styles.activityDuration}>{activity.duration} min</Text>
+           
+                <Text style={styles.dateadndurationText}>{activity.duration} min</Text>
             </View>
         </View>
     );
@@ -28,47 +35,51 @@ const styles = StyleSheet.create({
     itemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#4B4B7C', 
+        backgroundColor: colors.darkpurple,
         justifyContent: 'space-between',
         borderRadius: 10,
         padding: 10,
-        marginBottom: 10,
         width: '90%',
-        marginTop: 20,
+        marginBottom: 20,
         marginHorizontal: 20,
     },
 
-    activityInfo: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
     activityName: {
         fontWeight: 'bold',
         fontSize: 14, 
-        color: '#AAA8C8', 
+        color: colors.screenBackground,
+   
     },
     icon: {
-        marginLeft: 8, 
+        alignItems: 'center',
+        justifyContent: 'center',
+
+
     },
-     dateContainer: {
+        dateContainer: {
+            backgroundColor: 'white',
+            padding: 6,
+            alignItems: 'center',
+            marginLeft: 10,
+            marginRight: 2,
+         
+        
+    },
+     durationContainer: {
         backgroundColor: 'white',
         padding: 6,
-        marginRight: 6, 
+         alignItems: 'center',
+
+ 
+      
+        
     },
-    activityDate: {
-        color: '#4B4B7C', 
-        marginBottom: 4,
+    dateadndurationText: {
+        color: colors.darkpurple, 
         fontWeight: 'bold',
         fontSize: 14,
+        textAlign: 'center',
     },
-   durationContainer: {
-        backgroundColor: 'white',
-        padding: 6,
-    },
-    activityDuration: {
-        color: '#4B4B7C', 
-        fontWeight: 'bold',
-        fontSize: 14,
-    },
+
 });
 

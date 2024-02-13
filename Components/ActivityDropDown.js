@@ -28,7 +28,6 @@ export default function ActivityDropDownPicker({ onActivityChange }) {
       }}
       placeholder="Select An Activity"
       style={styles.container}
-      textStyle={StyleSheet.textStyle}
     />
   );
 }
@@ -36,9 +35,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#AAA8C8',
     marginBottom: 20,
-  },
-  textStyle: {
-    fontSize: 18,
-    color: "darkslateblue",
   },
 })

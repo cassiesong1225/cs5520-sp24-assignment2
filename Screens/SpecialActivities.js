@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import {  View } from 'react-native'
 import React, { useEffect, useContext} from 'react'
 import GlobalStyles from '../StyleHelper'
 import ActivityList from '../Components/ActivityList'
@@ -21,5 +21,3 @@ export default function SpecialActivities({ navigation }) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({})

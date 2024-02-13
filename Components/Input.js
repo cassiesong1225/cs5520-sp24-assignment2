@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     input: {
-    backgroundColor:'#AAA8C8',
+    backgroundColor:colors.screenBackground,
     borderColor: colors.darkpurple,
     borderWidth: 2,
     height: 30,

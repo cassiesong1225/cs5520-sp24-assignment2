@@ -11,6 +11,7 @@ export default function ActivityList({ activities,filter }) {
     return (
         <View style={styles.listContainer}>
             <FlatList
+                style={styles.container}
                 contentContainerStyle={styles.scrollViewContent}
                 data={filteredActivities}
                 renderItem={renderItem}
@@ -26,6 +27,11 @@ const styles = StyleSheet.create({
     },
     scrollViewContent: {
     alignItems: "center",
+    },
+    container: {
+    flex: 1,
+    width: '100%',
+    padding: 6,
   },
     
 });
