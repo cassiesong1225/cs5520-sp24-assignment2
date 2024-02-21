@@ -43,7 +43,7 @@ const AddAnActivity = ({ navigation }) => {
     navigation.navigate('AllActivities');
   };
 
-  const isSpecial = (activityType === 'Running' || activityType === 'Weight Training') && duration > 60;
+  const isSpecial = (activityType === 'Running' || activityType === 'Weights') && duration > 60;
 
 
   const handleCancel = () => {
