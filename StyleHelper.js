@@ -8,8 +8,8 @@ export default GlobalStyles = StyleSheet.create({
        ScreenContainer: {
         flex: 1,
         backgroundColor: colors.screenBackground,
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
     },
     lable: {
         fontSize: 15,

@@ -7,25 +7,22 @@ export default function ActivityItem({ activity }) {
      
     return (
         <View style={ styles.itemContainer }>
-        
                 <Text style={styles.activityName}>{activity.type}</Text>
-            <View style={styles.icon}>
+        
                 {activity.isSpecial ? (
                     <Entypo name="warning" size={24} color="orange" />)
                        : (
-                 <View style={{ width: 24,marginRight:15 }} /> 
+                 <View style={{ width: 15,marginRight:15 }} /> 
 
                    )} 
-            </View>
-         
-            <View style={styles.dateContainer}>
-            <Text style={styles.dateadndurationText}>
+            <View style={styles.timeContiner}>
+                <Text style={styles.dateadndurationText}>
                 {activity.date ? new Date(activity.date).toDateString() : ''}
                 </Text>
             </View>
-            <View style={styles.durationContainer}>
-           
+             <View style={styles.timeContiner}> 
                 <Text style={styles.dateadndurationText}>{activity.duration} min</Text>
+            
             </View>
         </View>
     );
@@ -39,9 +36,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderRadius: 10,
         padding: 10,
-        width: '90%',
+        width:'90%',
         marginBottom: 20,
         marginHorizontal: 20,
+        height: 50,
     },
 
     activityName: {
@@ -50,35 +48,29 @@ const styles = StyleSheet.create({
         color: colors.screenBackground,
    
     },
-    icon: {
-        alignItems: 'center',
-        justifyContent: 'center',
 
-
-    },
-        dateContainer: {
-            backgroundColor: 'white',
-            padding: 6,
+        timeContiner: {
+        flexDirection: 'row',
             alignItems: 'center',
-            marginLeft: 10,
-            marginRight: 2,
-         
+            backgroundColor: 'white',
+            height: 30,
+            justifyContent: 'flex-end',
+            paddingHorizontal: 5,
         
     },
-     durationContainer: {
-        backgroundColor: 'white',
-        padding: 6,
-         alignItems: 'center',
 
- 
       
         
-    },
-    dateadndurationText: {
+
+    timeText: {
+        backgroundColor: 'white',
         color: colors.darkpurple, 
         fontWeight: 'bold',
         fontSize: 14,
         textAlign: 'center',
+        padding: 5,
+        marginRight: 3,
+        marginLeft: 'auto',
     },
 
 });

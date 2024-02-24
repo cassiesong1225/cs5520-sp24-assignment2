@@ -11,7 +11,7 @@ const AddAnActivity = ({ navigation }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const { addActivity } = useContext(ActivitiesListContext);
 
-  const [activityType, setActivityType] = useState(''); // Renamed for consistency
+  const [activityType, setActivityType] = useState(''); 
 
   const handleSaveActivity = () => {
     if (!activityType) {

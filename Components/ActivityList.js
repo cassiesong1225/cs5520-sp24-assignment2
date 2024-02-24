@@ -9,10 +9,9 @@ export default function ActivityList({ activities,filter }) {
     const renderItem = ({ item }) => <ActivityItem activity={item} />;
     
     return (
-        <View style={styles.listContainer}>
+        <View >
             <FlatList
                 style={styles.container}
-                contentContainerStyle={styles.scrollViewContent}
                 data={filteredActivities}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
@@ -22,16 +21,13 @@ export default function ActivityList({ activities,filter }) {
 }
 
 const styles = StyleSheet.create({
-    listContainer: {
-        flex: 1,
-    },
-    scrollViewContent: {
-    alignItems: "center",
-    },
+    // listContainer: {
+    //     flex: 1,
+    // },
     container: {
     flex: 1,
     width: '100%',
-    padding: 6,
+    padding: 10,                        
   },
     
 });
