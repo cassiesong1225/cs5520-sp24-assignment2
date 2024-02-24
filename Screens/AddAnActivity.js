@@ -7,7 +7,7 @@ import GlobalStyles, { colors } from '../StyleHelper'
 
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
   const { addActivity } = useContext(ActivitiesListContext);
 
@@ -27,7 +27,8 @@ const AddAnActivity = ({ navigation }) => {
      if (!selectedDate) {
       alert('Please select a date.');
       return;
-    }
+     }
+    
 
 
     
@@ -36,7 +37,7 @@ const AddAnActivity = ({ navigation }) => {
       id: Date.now().toString(),
       type: activityType,
       duration: numericDuration,
-      date: selectedDate.toISOString(),
+      date: selectedDate.toDateString(),
       isSpecial,
     });
     
@@ -44,7 +45,12 @@ const AddAnActivity = ({ navigation }) => {
   };
 
   const isSpecial = (activityType === 'Running' || activityType === 'Weights') && duration > 60;
-
+  const showDatePickerHandler = () => {
+   if (!selectedDate) {
+      setSelectedDate(new Date());
+    }
+    setShowDatePicker(!showDatePicker);
+};
 
   const handleCancel = () => {
     setSelectedDate(new Date());
@@ -68,15 +74,12 @@ const AddAnActivity = ({ navigation }) => {
         />
         <Text style={GlobalStyles.lable}>Date *</Text>
 
-      <TouchableOpacity
-        style={styles.input}
-        onPress={() => setShowDatePicker(true)}
-        >
-             <Text style={styles.dateText}>
-          {selectedDate ? selectedDate.toDateString() : ''}
-        </Text>
+      <TextInput
+          value={selectedDate ? selectedDate.toDateString() : ''}
+          onPressIn={showDatePickerHandler}
+          style={styles.input} 
   
-        </TouchableOpacity>
+        />
      
 
       {showDatePicker && (

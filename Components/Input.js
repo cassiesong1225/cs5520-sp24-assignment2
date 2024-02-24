@@ -4,7 +4,8 @@ import React from "react";
 import { colors } from '../StyleHelper';
 
 
-const Input= ({label, value, onChangeText, error}) => {
+const Input = ({ label, value, onChangeText, error }) => {
+    
 
     return (
         <View style={styles.inputContainer} >
