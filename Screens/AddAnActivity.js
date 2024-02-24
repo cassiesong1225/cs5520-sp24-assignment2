@@ -5,8 +5,9 @@ import ActivityDropDownPicker from '../Components/ActivityDropDown';
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
 import GlobalStyles, { colors } from '../StyleHelper'
 import PressableButton from '../Components/PressableButton';
+import { addActivityToDB } from '../firebase-files/fireStoreHelper';
 
-const AddAnActivity = ({ navigation }) => {
+const AddAnActivity = ({ route , navigation }) => {
   const [duration, setDuration] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -14,7 +15,7 @@ const AddAnActivity = ({ navigation }) => {
 
   const [activityType, setActivityType] = useState(''); 
 
-  const handleSaveActivity = () => {
+  const handleSaveActivity = async() => {
     if (!activityType) {
       alert('Please select an activity type.');
       return;
@@ -34,15 +35,19 @@ const AddAnActivity = ({ navigation }) => {
 
     
     // Add activity to the context
-    addActivity({
-      id: Date.now().toString(),
+    const activityData = {
       type: activityType,
       duration: numericDuration,
-      date: selectedDate.toDateString(),
+      date: selectedDate.toISOString(),
       isSpecial,
-    });
+    };
+    try {
+      await addActivityToDB(activityData);
     
-    navigation.navigate('AllActivities');
+      navigation.navigate('AllActivities');
+    } catch (error) {
+      console.log('Error adding activity', error);
+    } 
   };
 
   const isSpecial = (activityType === 'Running' || activityType === 'Weights') && duration > 60;
@@ -58,7 +63,6 @@ const AddAnActivity = ({ navigation }) => {
     setDuration("");
     navigation.goBack();
   };
-  console.log('date', selectedDate);
 
 
   return (
