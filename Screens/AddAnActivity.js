@@ -4,6 +4,7 @@ import DatePickerComponent from '../Components/DatePicker';
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
 import GlobalStyles, { colors } from '../StyleHelper'
+import PressableButton from '../Components/PressableButton';
 
 const AddAnActivity = ({ navigation }) => {
   const [duration, setDuration] = useState('');
@@ -92,8 +93,16 @@ const AddAnActivity = ({ navigation }) => {
       )}
 
       <View style={styles.buttonContainer}>
-        <Button title="Cancel" onPress={handleCancel} color="red" />
-          <Button title="Save" onPress={handleSaveActivity} color={colors.darkpurple} />
+         <PressableButton 
+          customStyle={styles.cancelButton} 
+          onPressFunction={handleCancel} >
+          <Text style={styles.buttonText}>Cancel</Text>
+          </PressableButton>
+          <PressableButton 
+          customStyle={styles.saveButton} 
+          onPressFunction={handleSaveActivity} >
+          <Text style={styles.buttonText}>Save</Text>
+          </PressableButton>
         </View>
 
       </View>
@@ -108,7 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   edit: {
-      marginTop: 20,
+      marginTop: 30,
       marginHorizontal: 10,
   },
 
@@ -117,7 +126,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   dateText: {
     fontSize: 16,
@@ -126,7 +135,19 @@ const styles = StyleSheet.create({
     marginTop: 150,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    paddingHorizontal: 20,
   },
+   cancelButton: {
+        backgroundColor: colors.red,
+  },
+  saveButton: {
+    backgroundColor: colors.darkpurple,
+  }
+,
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+  }
 });
 
 export default AddAnActivity;
