@@ -42,8 +42,8 @@ const AddAnActivity = ({ route , navigation }) => {
       isSpecial,
     };
     try {
-      await addActivityToDB(activityData);
-    
+      addActivityToDB(activityData);
+
       navigation.navigate('AllActivities');
     } catch (error) {
       console.log('Error adding activity', error);

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { colors } from '../StyleHelper';
+import PressableButton from './PressableButton';
 
 export default function ActivityItem({ activity }) {
      
