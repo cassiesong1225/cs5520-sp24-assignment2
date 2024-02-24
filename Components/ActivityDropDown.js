@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { StyleSheet } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -12,9 +12,13 @@ const activities = [
   { label: "Hiking", value: "Hiking" },
 ];
 
-export default function ActivityDropDownPicker({ onActivityChange }) {
+export default function ActivityDropDownPicker({ onActivityChange,activityType }) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(activityType);
+
+  useEffect(() => {
+    setValue(activityType);
+  }, [activityType]);
 
   return (
     <DropDownPicker

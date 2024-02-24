@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function ActivityItem({ activity }) {
      const navigation = useNavigation();
      function activityPressHandler() {
-    navigation.navigate("AddAnActivity");
+    navigation.navigate("AddAnActivity", { activityId: activity.id });
   }
      
     return (

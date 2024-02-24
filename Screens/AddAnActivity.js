@@ -1,20 +1,40 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import DatePickerComponent from '../Components/DatePicker'; 
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
 import GlobalStyles, { colors } from '../StyleHelper'
 import PressableButton from '../Components/PressableButton';
-import { addActivityToDB } from '../firebase-files/fireStoreHelper';
+import { addActivityToDB, fetchActivityById, updateActivityById } from '../firebase-files/fireStoreHelper';
 
 const AddAnActivity = ({ route, navigation }) => {
-  console.log('AddAnActivity route', route.params);
   const [duration, setDuration] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const { addActivity } = useContext(ActivitiesListContext);
-
+  // const { addActivity } = useContext(ActivitiesListContext);
   const [activityType, setActivityType] = useState(''); 
+  const [isEditMode, setIsEditMode] = useState(false);
+  
+
+  useEffect(() => {
+    if (route.params && route.params.activityId) {
+      setIsEditMode(true);
+      fetchActivityData(route.params.activityId);
+    }
+  }, [route.params]);
+
+  const fetchActivityData = async (activityId) => {
+    try {
+      const activityData = await fetchActivityById(activityId);
+      if (activityData) {
+        setActivityType(activityData.type);
+        setDuration(activityData.duration.toString()); // Convert to string if necessary
+        setSelectedDate(new Date(activityData.date)); // Ensure date format is correct for your DatePickerComponent
+      }
+    } catch (error) {
+      console.error("Error fetching activity data: ", error);
+    }
+  };
 
   const handleSaveActivity = async() => {
     if (!activityType) {
@@ -32,9 +52,6 @@ const AddAnActivity = ({ route, navigation }) => {
       return;
      }
     
-
-
-    
     // Add activity to the context
     const activityData = {
       type: activityType,
@@ -43,10 +60,13 @@ const AddAnActivity = ({ route, navigation }) => {
       isSpecial,
     };
     try {
-      addActivityToDB(activityData);
-
-      navigation.navigate('AllActivities');
-    } catch (error) {
+      if (isEditMode) {
+        await updateActivityById(route.params.activityId, activityData);
+      } else {
+        await addActivityToDB(activityData);
+      } navigation.navigate('AllActivities');
+    }
+    catch (error) {
       console.log('Error adding activity', error);
     } 
   };
@@ -70,7 +90,9 @@ const AddAnActivity = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.edit}>
         <Text style={GlobalStyles.lable}>Activity *</Text>
-        <ActivityDropDownPicker onActivityChange={setActivityType} />
+        <ActivityDropDownPicker
+          onActivityChange={setActivityType} 
+          activityType={activityType}  />
       <Text style={GlobalStyles.lable}>Duration *</Text>
       <TextInput
         style={styles.input}

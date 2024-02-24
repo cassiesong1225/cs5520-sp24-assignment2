@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc, setDoc,getDocs } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc,getDoc,updateDoc } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addActivityToDB(activityData) {
@@ -17,4 +17,31 @@ export async function deleteFromDB(id) {
     catch (err) {
         console.log("Error deleting document: ", err);
     }
+}
+
+export async function updateActivityById(activityId, activityData) {
+  const docRef = doc(database, "activities", activityId);
+  try {
+    await updateDoc(docRef, activityData);
+    console.log("Document successfully updated");
+  } catch (error) {
+    console.error("Error updating document: ", error);
+    throw error; // Rethrow the error if you want to handle it outside
+  }
+}
+
+export async function fetchActivityById(activityId) {
+  const docRef = doc(database, "activities", activityId);
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() };
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching activity: ", error);
+    throw error; // Rethrow the error if you want to handle it outside
+  }
 }
