@@ -16,7 +16,7 @@ export default function ActivityList({ filter }) {
       let newArray = [];
       querrySnapshot.forEach((doc) => {
         newArray.push({ ...doc.data(), id: doc.id });
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
       });
       setActivities(newArray);
 

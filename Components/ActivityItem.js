@@ -3,11 +3,20 @@ import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { colors } from '../StyleHelper';
 import PressableButton from './PressableButton';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ActivityItem({ activity }) {
+     const navigation = useNavigation();
+     function activityPressHandler() {
+    navigation.navigate("AddAnActivity");
+  }
      
     return (
-        <View style={ styles.itemContainer }>
+        <View >
+            <PressableButton
+            customStyle={styles.itemContainer} 
+            onPressFunction={activityPressHandler}>
+            
                 <Text style={styles.activityName}>{activity.type}</Text>
         
                 {activity.isSpecial ? (
@@ -24,7 +33,8 @@ export default function ActivityItem({ activity }) {
              <View style={styles.timeContiner}> 
                 <Text style={styles.dateadndurationText}>{activity.duration} min</Text>
             
-            </View>
+                </View>
+            </PressableButton>
         </View>
     );
 }

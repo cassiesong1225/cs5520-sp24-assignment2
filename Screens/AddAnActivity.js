@@ -7,7 +7,8 @@ import GlobalStyles, { colors } from '../StyleHelper'
 import PressableButton from '../Components/PressableButton';
 import { addActivityToDB } from '../firebase-files/fireStoreHelper';
 
-const AddAnActivity = ({ route , navigation }) => {
+const AddAnActivity = ({ route, navigation }) => {
+  console.log('AddAnActivity route', route.params);
   const [duration, setDuration] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
