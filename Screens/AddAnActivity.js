@@ -129,7 +129,7 @@ const AddAnActivity = ({ route, navigation }) => {
     headerStyle: { backgroundColor: colors.darkpurple },
     headerTintColor: 'white',
   });
-}, [navigation, isEditMode, route.params.activityId]);
+}, [navigation, isEditMode, route.params?.activityId]);
 
 
   return (
