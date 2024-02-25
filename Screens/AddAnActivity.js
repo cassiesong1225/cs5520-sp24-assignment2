@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import DatePickerComponent from '../Components/DatePicker'; 
 import ActivityDropDownPicker from '../Components/ActivityDropDown'; 
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
@@ -36,39 +36,58 @@ const AddAnActivity = ({ route, navigation }) => {
     }
   };
 
-  const handleSaveActivity = async() => {
-    if (!activityType) {
-      alert('Please select an activity type.');
-      return;
-    }
+  const handleSaveActivity = async () => {
+    const proceedWithSave = async () => {
+      if (!activityType) {
+        alert('Please select an activity type.');
+        return;
+      }
 
-    const numericDuration = parseInt(duration, 10);
-    if (isNaN(numericDuration) || numericDuration <= 0) {
-      alert('Please enter a valid duration.');
-      return;
-    }
-     if (!selectedDate) {
-      alert('Please select a date.');
-      return;
-     }
+      const numericDuration = parseInt(duration, 10);
+      if (isNaN(numericDuration) || numericDuration <= 0) {
+        alert('Please enter a valid duration.');
+        return;
+      }
+      if (!selectedDate) {
+        alert('Please select a date.');
+        return;
+      }
     
-    // Add activity to the context
-    const activityData = {
-      type: activityType,
-      duration: numericDuration,
-      date: selectedDate.toISOString(),
-      isSpecial,
+      // Add activity to the context
+      const activityData = {
+        type: activityType,
+        duration: numericDuration,
+        date: selectedDate.toISOString(),
+        isSpecial,
+      };
+      try {
+        if (isEditMode) {
+          await updateActivityById(route.params.activityId, activityData);
+        } else {
+          await addActivityToDB(activityData);
+        } navigation.navigate('AllActivities');
+      }
+      catch (error) {
+        console.log('Error adding activity', error);
+      }
     };
-    try {
-      if (isEditMode) {
-        await updateActivityById(route.params.activityId, activityData);
-      } else {
-        await addActivityToDB(activityData);
-      } navigation.navigate('AllActivities');
+    if (isEditMode) {
+      Alert.alert(
+        "Important", // Title
+        "Are you sure you want to save these changes?", // Message
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "Yes", onPress: () => proceedWithSave() } // Proceed with saving
+        ]
+      );
+    } else {
+      // If not in edit mode, proceed with save directly
+      proceedWithSave();
     }
-    catch (error) {
-      console.log('Error adding activity', error);
-    } 
   };
 
   const isSpecial = (activityType === 'Running' || activityType === 'Weights') && duration > 60;
