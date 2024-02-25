@@ -77,7 +77,7 @@ const AddAnActivity = ({ route, navigation }) => {
         "Are you sure you want to save these changes?", // Message
         [
           {
-            text: "Cancel",
+            text: "No",
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },
