@@ -5,7 +5,10 @@ import ActivityDropDownPicker from '../Components/ActivityDropDown';
 import { ActivitiesListContext } from '../Components/ActivitiesListContext'; 
 import GlobalStyles, { colors } from '../StyleHelper'
 import PressableButton from '../Components/PressableButton';
-import { addActivityToDB, fetchActivityById, updateActivityById } from '../firebase-files/fireStoreHelper';
+import { addActivityToDB, fetchActivityById, updateActivityById, deleteFromDB} from '../firebase-files/fireStoreHelper';
+import AddButton from '../Components/AddButton';
+import { AntDesign } from "@expo/vector-icons";
+
 
 const AddAnActivity = ({ route, navigation }) => {
   const [duration, setDuration] = useState('');
@@ -20,7 +23,9 @@ const AddAnActivity = ({ route, navigation }) => {
     if (route.params && route.params.activityId) {
       setIsEditMode(true);
       fetchActivityData(route.params.activityId);
-    }
+    }else {
+    setIsEditMode(false); 
+  }
   }, [route.params]);
 
   const fetchActivityData = async (activityId) => {
@@ -103,6 +108,28 @@ const AddAnActivity = ({ route, navigation }) => {
     setDuration("");
     navigation.goBack();
   };
+
+  
+  const deleteHandler = async (activityId) => {
+    await deleteFromDB(activityId);
+  
+    navigation.goBack();
+  }
+
+  useEffect(() => {
+    const showDeleteButton = isEditMode ? () => (
+    <PressableButton
+      onPressFunction={() => deleteHandler(route.params.activityId)}
+      customStyle={styles.deleteButtonStyle}>
+      <AntDesign name="delete" size={24} color="white" />
+    </PressableButton>
+  ) : null; 
+  navigation.setOptions({
+    headerRight: showDeleteButton,
+    headerStyle: { backgroundColor: colors.darkpurple },
+    headerTintColor: 'white',
+  });
+}, [navigation, isEditMode, route.params.activityId]);
 
 
   return (
@@ -193,6 +220,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     textAlign: 'center',
+  },
+  deleteButtonStyle: {
+    backgroundColor: 'transparent', 
+    alignItems: 'flex-end',
   }
 });
 

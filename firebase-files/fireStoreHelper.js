@@ -12,12 +12,7 @@ export async function addActivityToDB(activityData) {
 
 
 
-export async function deleteFromDB(id) { 
-    try { await deleteDoc(doc(database, "goals",id)); }
-    catch (err) {
-        console.log("Error deleting document: ", err);
-    }
-}
+
 
 export async function updateActivityById(activityId, activityData) {
   const docRef = doc(database, "activities", activityId);
@@ -44,4 +39,11 @@ export async function fetchActivityById(activityId) {
     console.error("Error fetching activity: ", error);
     throw error; // Rethrow the error if you want to handle it outside
   }
+}
+
+export async function deleteFromDB(activityId) { 
+    try { await deleteDoc(doc(database, "activities", activityId)); }
+    catch (err) {
+        console.log("Error deleting document: ", err);
+    }
 }
