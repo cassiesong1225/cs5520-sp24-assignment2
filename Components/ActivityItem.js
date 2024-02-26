@@ -10,8 +10,10 @@ export default function ActivityItem({ activity }) {
      function activityPressHandler() {
     navigation.navigate("AddAnActivity", { activityId: activity.id });
   }
-     
+    console.log('activity', activity);  
     return (
+        
+    
         <View >
             <PressableButton
             customStyle={styles.itemContainer} 

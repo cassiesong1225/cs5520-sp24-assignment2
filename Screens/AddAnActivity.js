@@ -6,8 +6,8 @@ import { ActivitiesListContext } from '../Components/ActivitiesListContext';
 import GlobalStyles, { colors } from '../StyleHelper'
 import PressableButton from '../Components/PressableButton';
 import { addActivityToDB, fetchActivityById, updateActivityById, deleteFromDB} from '../firebase-files/fireStoreHelper';
-import AddButton from '../Components/AddButton';
 import { AntDesign } from "@expo/vector-icons";
+import Checkbox from 'expo-checkbox';
 
 
 const AddAnActivity = ({ route, navigation }) => {
@@ -17,6 +17,11 @@ const AddAnActivity = ({ route, navigation }) => {
   // const { addActivity } = useContext(ActivitiesListContext);
   const [activityType, setActivityType] = useState(''); 
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isChecked, setChecked] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
+
+
+
   
 
   useEffect(() => {
@@ -35,11 +40,22 @@ const AddAnActivity = ({ route, navigation }) => {
         setActivityType(activityData.type);
         setDuration(activityData.duration.toString()); // Convert to string if necessary
         setSelectedDate(new Date(activityData.date)); // Ensure date format is correct for your DatePickerComponent
+        setIsUpdate(activityData.isSpecial);
+        console.log('activityData.isSpecial', activityData.isSpecial);
       }
     } catch (error) {
       console.error("Error fetching activity data: ", error);
     }
   };
+console.log('isUpdate', isUpdate);
+ 
+let isSpecial = (activityType === 'Running' || activityType === 'Weights') && duration > 60;
+  
+ 
+  const ShowCheckbox = isUpdate && isSpecial && isEditMode;
+    
+  console.log('ShowCheckbox', ShowCheckbox);
+  
 
   const handleSaveActivity = async () => {
     const proceedWithSave = async () => {
@@ -89,13 +105,17 @@ const AddAnActivity = ({ route, navigation }) => {
           { text: "Yes", onPress: () => proceedWithSave() } // Proceed with saving
         ]
       );
+    } if (isChecked) { 
+      isSpecial = false;
+      console.log('isSpecial', isSpecial);
+    
     } else {
-      // If not in edit mode, proceed with save directly
       proceedWithSave();
     }
   };
 
-  const isSpecial = (activityType === 'Running' || activityType === 'Weights') && duration > 60;
+ 
+
   const showDatePickerHandler = () => {
    if (!selectedDate) {
       setSelectedDate(new Date());
@@ -129,8 +149,12 @@ const AddAnActivity = ({ route, navigation }) => {
     headerStyle: { backgroundColor: colors.darkpurple },
     headerTintColor: 'white',
   });
-}, [navigation, isEditMode, route.params?.activityId]);
+  }, [navigation, isEditMode, route.params?.activityId]);
 
+const handlecheckbox = () => {
+  setChecked(!isChecked);
+
+    };
 
   return (
     <View style={styles.container}>
@@ -163,7 +187,17 @@ const AddAnActivity = ({ route, navigation }) => {
         showDatePicker={showDatePicker}
         setShowDatePicker={setShowDatePicker}
       />
-      )}
+        )}
+        {ShowCheckbox && (
+          <View style={styles.checkboxContainer}>
+          <Checkbox
+              value={isChecked}
+              onValueChange={
+              handlecheckbox}
+            color={isChecked ? colors.darkpurple : undefined}
+          />
+          <Text style={styles.checkboxLabel}>not mark as Special Activity</Text>
+        </View>)}
 
       <View style={styles.buttonContainer}>
          <PressableButton 
