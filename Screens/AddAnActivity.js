@@ -105,13 +105,14 @@ let isSpecial = (activityType === 'Running' || activityType === 'Weights') && du
           { text: "Yes", onPress: () => proceedWithSave() } // Proceed with saving
         ]
       );
-    } if (isChecked) { 
+    }else {
+      proceedWithSave();
+    }
+    if (isChecked) { 
       isSpecial = false;
       console.log('isSpecial', isSpecial);
     
-    } else {
-      proceedWithSave();
-    }
+    } 
   };
 
  
