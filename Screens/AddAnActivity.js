@@ -206,7 +206,8 @@ const handlecheckbox = () => {
       <View style={styles.bottomContainer}>
         {ShowCheckbox && (
           <View style={styles.checkboxContainer}>
-          <Text style={styles.checkboxLabel}>not mark as Special Activity</Text>
+              <Text style={styles.checkboxLabel}>This item is marked as special.
+                Select the Checkbox if you wouls like to approve it</Text>
           <Checkbox
               value={isChecked}
               onValueChange={
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   edit: {
-    marginTop: 30,
+    marginTop: 50,
     marginHorizontal: 10,
   },
 
@@ -250,6 +251,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 30,
+    marginTop: 10,
   },
   dateText: {
     fontSize: 16,
@@ -274,20 +276,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'flex-end',
   },
-  checkboxContainer: {
-    flexDirection: "row",
-    marginRight: 30,
-    padding: 10,
-  },
+
 
   bottomContainer: {
     flexDirection: "column",
     justifyContent: "center",
-    marginTop: 200,
+    marginTop: 180,
+  },
+    checkboxContainer: {
+    flexDirection: "row",
+      marginLeft: 20,
+  marginBottom: 10,
+
+   
   },
   checkboxLabel: { 
-    fontSize: 16,
-    marginLeft: 40,
+    fontSize: 14,
+    marginLeft: 15,
     alignItems: "center",
     marginEnd: 20,
     color: colors.darkpurple,
