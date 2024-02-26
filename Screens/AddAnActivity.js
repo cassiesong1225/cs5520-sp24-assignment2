@@ -131,9 +131,23 @@ let isSpecial = (activityType === 'Running' || activityType === 'Weights') && du
 
   
   const deleteHandler = async (activityId) => {
-    await deleteFromDB(activityId);
-  
-    navigation.goBack();
+   Alert.alert(
+      "Delete",
+      "Are you sure you want to delete this item?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("Deletion cancelled"),
+        },
+        {
+          text: "Yes",
+          onPress: async () => {
+            await deleteFromDB(activityId);
+            navigation.goBack();
+          },
+        }
+      ]
+    );
   }
 
   useEffect(() => {
