@@ -203,17 +203,17 @@ const handlecheckbox = () => {
         setShowDatePicker={setShowDatePicker}
       />
         )}
+      <View style={styles.bottomContainer}>
         {ShowCheckbox && (
           <View style={styles.checkboxContainer}>
+          <Text style={styles.checkboxLabel}>not mark as Special Activity</Text>
           <Checkbox
               value={isChecked}
               onValueChange={
               handlecheckbox}
             color={isChecked ? colors.darkpurple : undefined}
           />
-          <Text style={styles.checkboxLabel}>not mark as Special Activity</Text>
         </View>)}
-
       <View style={styles.buttonContainer}>
          <PressableButton 
           customStyle={styles.cancelButton} 
@@ -226,6 +226,7 @@ const handlecheckbox = () => {
           <Text style={styles.buttonText}>Save</Text>
           </PressableButton>
         </View>
+      </View>
 
       </View>
     </View>
@@ -234,13 +235,13 @@ const handlecheckbox = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: colors.screenBackground,
     justifyContent: 'flex-start',
   },
   edit: {
-      marginTop: 30,
-      marginHorizontal: 10,
+    marginTop: 30,
+    marginHorizontal: 10,
   },
 
   input: {
@@ -254,26 +255,45 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonContainer: {
-    marginTop: 150,
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingHorizontal: 20,
   },
-   cancelButton: {
-        backgroundColor: colors.red,
+  cancelButton: {
+    backgroundColor: colors.red,
   },
   saveButton: {
     backgroundColor: colors.darkpurple,
   }
-,
+  ,
   buttonText: {
     color: 'white',
     textAlign: 'center',
   },
   deleteButtonStyle: {
-    backgroundColor: 'transparent', 
+    backgroundColor: 'transparent',
     alignItems: 'flex-end',
-  }
-});
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginRight: 30,
+    padding: 10,
+  },
+
+  bottomContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    marginTop: 200,
+  },
+  checkboxLabel: { 
+    fontSize: 16,
+    marginLeft: 40,
+    alignItems: "center",
+    marginEnd: 20,
+    color: colors.darkpurple,
+    fontWeight: "bold",
+   },
+}
+);
 
 export default AddAnActivity;
