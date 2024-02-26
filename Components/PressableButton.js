@@ -5,6 +5,7 @@ export default function PressableButton({
   customStyle,
   onPressFunction,
   children,
+  
 })
     
 
@@ -33,4 +34,5 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.5,
   },
+
 });
