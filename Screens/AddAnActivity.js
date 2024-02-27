@@ -8,15 +8,18 @@ import PressableButton from '../Components/PressableButton';
 import { addActivityToDB, fetchActivityById, updateActivityById, deleteFromDB} from '../firebase-files/fireStoreHelper';
 import { AntDesign } from "@expo/vector-icons";
 import Checkbox from 'expo-checkbox';
+import useEditMode from './Edit';
 
 
 const AddAnActivity = ({ route, navigation }) => {
+  const { activityId } = route.params || {};
+  const { isEditMode, activityData } = useEditMode(activityId);
+
   const [duration, setDuration] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
   // const { addActivity } = useContext(ActivitiesListContext);
   const [activityType, setActivityType] = useState(''); 
-  const [isEditMode, setIsEditMode] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -25,29 +28,14 @@ const AddAnActivity = ({ route, navigation }) => {
   
 
   useEffect(() => {
-    if (route.params && route.params.activityId) {
-      setIsEditMode(true);
-      fetchActivityData(route.params.activityId);
-    }else {
-    setIsEditMode(false); 
-  }
-  }, [route.params]);
-
-  const fetchActivityData = async (activityId) => {
-    try {
-      const activityData = await fetchActivityById(activityId);
-      if (activityData) {
-        setActivityType(activityData.type);
-        setDuration(activityData.duration.toString()); // Convert to string if necessary
-        setSelectedDate(new Date(activityData.date)); // Ensure date format is correct for your DatePickerComponent
-        setIsUpdate(activityData.isSpecial);
-        console.log('activityData.isSpecial', activityData.isSpecial);
-      }
-    } catch (error) {
-      console.error("Error fetching activity data: ", error);
+    if (activityData) {
+      setActivityType(activityData.type);
+      setDuration(activityData.duration.toString());
+      setSelectedDate(new Date(activityData.date));
+     setIsUpdate(activityData.isSpecial);
     }
-  };
-console.log('isUpdate', isUpdate);
+  }, [activityData]);
+
  
 let isSpecial = (activityType === 'Running' || activityType === 'Weights') && duration > 60;
   
