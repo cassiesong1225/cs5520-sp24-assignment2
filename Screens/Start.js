@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import Input from '../Components/Input'; 
 import GlobalStyles from '../StyleHelper';
+import PressableButton from '../Components/PressableButton';
 
 export default function StartScreen({ navigation}) {
   const [email, setEmail] = useState('');
@@ -71,19 +72,19 @@ export default function StartScreen({ navigation}) {
         keyboardType="phone-pad"
       />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleReset}
+        <PressableButton
+          customStyle={styles.button}
+          onPressFunction={handleReset}
         >
           <Text style={styles.ResetButtonText}>Reset</Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={styles.button}
-          onPress={handleStart}
-          disabled={!email || !phoneNumber}
-        > */}
-          <Button title='Start' onPress={handleStart} disabled={disableStartHandler()}/>
-        {/* </TouchableOpacity> */}
+        </PressableButton>
+        
+        <PressableButton
+          customStyle={[styles.button]}
+          onPressFunction={handleStart}
+        >
+          <Text style={[disableStartHandler() ? styles.disabledText:styles.startButtonText]}>Start</Text>
+        </PressableButton>
       </View>
     </SafeAreaView>
   );
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minWidth: 100, 
+    backgroundColor: 'transparent',
   },
   ResetButtonText: { 
     color: '#a52a2a',
@@ -112,6 +114,15 @@ const styles = StyleSheet.create({
    fontSize: 18,
 
   }
+  ,
+  startButtonText: {
+    color: '#8a2be2',
+    fontSize: 18,
+  },
+   disabledText: {
+     color: 'lightgray', 
+      fontSize: 18,
+  },
 
 });
 

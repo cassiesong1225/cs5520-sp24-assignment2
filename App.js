@@ -22,13 +22,14 @@ export default function App() {
             options={{ headerShown: false }}
            />
           <Stack.Screen name="AddAnActivity" component={AddAnActivity}
-                        options={
+                        options={({ route }) => (
                           {
+                            title: route.params && route.params.activityId ? 'Edit ' : 'Add An Activity',
                             headerBackTitleVisible: false,
                             headerStyle: { backgroundColor: colors.darkpurple },
                             headerTintColor: 'white',
                           }
-                        } />
+                         )} />
                     </Stack.Navigator>
                     
 

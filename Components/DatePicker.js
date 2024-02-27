@@ -4,11 +4,17 @@ import {  Platform } from 'react-native';
 
 
 const DatePickerComponent = ({ date, setDate,showDatePicker, setShowDatePicker }) => {
-  console.log('date', date);
-  const onChange = (event, date) => {
-    setShowDatePicker(false);
-    setDate(date);
-  };
+  const onChange = (event, selectedDate) => {
+    if (Platform.OS === 'android' || event.type === 'set') {
+      setShowDatePicker(false);
+    }
+   
+    if (event.type === 'set') {
+      setDate(selectedDate);
+    }
+ };
+  
+
 
 
   return (
